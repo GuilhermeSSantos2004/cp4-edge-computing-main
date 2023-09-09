@@ -45,7 +45,7 @@ ideia de histórico.
 
 ___
 
-<img src="img/modelo_logico.jpg>
+<img src="img/modelo_logico.jpg">
 
 ## Desenvolvimento do projeto
 
