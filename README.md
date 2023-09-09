@@ -15,8 +15,6 @@
 **Ano:** 2023
 ___
 
-<img src="img/Arquitetura de rede(simlificada).jpg">
-
 ## 1º Descrição do desafio
 
 Fomos contratados pela Vinheria Agnello para desenvolver um sistema de monitoramento a ser instalado no ambiente em que os vinhos são armazenados. O dono a Vinheria informou que a qualidade do vinho é influenciada diretamente pelas condições de temperatura, umidade e luminosidade do ambiente. No primeiro momento, você propôs ao dono da Vinheria um projeto em etapas, de modo que seu 1° desafio foi:
@@ -45,7 +43,6 @@ ideia de histórico.
 
 ___
 
-<img src="img/modelo_logico.jpg">
 
 ## Desenvolvimento do projeto
 
@@ -55,6 +52,7 @@ A principal dificuldade do projeto foi compreender como enviar os dados do nosso
 
 O passo crucial para resolver esse desafio foi criar uma função que envia todos os dados para uma plataforma de IoT (Internet das Coisas). Para esse fim, escolhemos a plataforma tago.io. Desenvolvemos um painel dinâmico que exibe informações como temperatura, luminosidade e umidade. Além disso, como complemento, criamos uma função que verifica se os valores recebidos são ideais para o armazenamento de vinhos. Caso os valores estejam fora do padrão, a plataforma emitirá uma mensagem para os proprietários da Vinheria, alertando sobre a situação.
 
+<img src="img/Arquitetura de rede(simlificada).jpg">
 ___
    
 ## Pré-requisitos
@@ -87,6 +85,10 @@ Após a instalação do Arduíno IDE, você deve seguir os seguintes passos:
 3. Conecte os sensores e componentes de acordo com as instruções fornecidas no código.
 
 ____
+
+## Modelo lógico  
+
+<img src="img/modelo_logico.jpg">
 
 ## Video Explicativo
 Link do vídeo: https://drive.google.com/file/d/1z9HDu9Qwvj4LR8yPAYfAkxCH0zUB2N9J/view?usp=sharing
