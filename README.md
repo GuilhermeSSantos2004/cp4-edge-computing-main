@@ -15,7 +15,7 @@
 **Ano:** 2023
 ___
 
-<img src="img/Arquitetura de rede(simlificada).png">
+<img src="img/Arquitetura de rede(simlificada).jpg">
 
 ## 1º Descrição do desafio
 
