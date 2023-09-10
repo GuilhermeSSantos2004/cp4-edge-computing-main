@@ -12,11 +12,8 @@ float A = 1.00;   // Fator de correção de interceptação
 float B_VALUE = -0.50; // Fator de correção de inclinação
 
 /* Controle de Luz -----------------------------------------------------------*/
-
 /* Controle de temperatura -----------------------------------------------------------*/
-
 /* Controle de umidade -----------------------------------------------------------*/
-
 
 /* Mapeamento dos pinos -----------------------------------------------------------*/
 const int ldrPin = 13;  /* Sensor de luminosidade Pino D13 do ESP*/    
@@ -30,19 +27,16 @@ int valorLDR = 0;
 float temperatura = 0;
 float umidade = 0;
 
+/* Configuração do Wi-Fi ---------------------------------------------------------*/
 
 
-
-/* WiFi Configuration---------------------------------------------------------*/
-
-
-char wifiSsid[] = "homepage"; // This is the WiFi network name!
-char wifiPass[] = "carromoto";     // This is the wifi password!
+char wifiSsid[] = "-----"; // Nome da rede Wi-Fi
+char wifiPass[] = "-----";     // Senha da rede Wi-Fi
 
 
-char serverAddress[] = "https://api.tago.io/data";  // TagoIO address
+char serverAddress[] = "https://api.tago.io/data";  // endereço TagoIO 
 char contentHeader[] = "application/json";
-char tokenHeader[]   = "048c70a2-0935-4521-88e1-33668ef60f1c"; // TagoIO Token
+char tokenHeader[]   = "-----"; // TagoIO Token
 
 
 
