@@ -63,7 +63,7 @@ Para utilizar este projeto, você precisará de:
 
    - ESP32
    - Cabo de dados e carga - Micro USB
-   - LDR 
+   - LDR e DHT11
    - 1 resistor de 220 ohm
    - 1 resistor de 1k ohm
    - Protoboard 830 Pontos
