@@ -16,10 +16,17 @@ float B_VALUE = -0.50; // Fator de correção de inclinação
 /* Controle de umidade -----------------------------------------------------------*/
 
 /* Mapeamento dos pinos -----------------------------------------------------------*/
-const int ldrPin = 13;  /* Sensor de luminosidade Pino D13 do ESP*/    
+
+float r; //resistencia
+const int ldrPin = 34;  /* Sensor de luminosidade Pino D34 do ESP*/  
 const int sensorUmidPin  = 2;  /* Sensor de umidade Pino D14 do ESP */
 const int sensorTempPin  = 2;   /* Sensor de temperatura  Pino D2 do ESP */
 
+
+
+
+// Fatores de calibração (ajuste esses valores com base na calibração)
+const float luxPorVolts = 200;  // Fator de conversão de volts para lux 
 
 /* Definiçoes de Variaveis -----------------------------------------------------------*/
 
@@ -44,7 +51,10 @@ HTTPClient client;
 
 void setup() {
   Serial.begin(9600); // Configurando a comunicação serial do console
+  pinMode(ldrPin, INPUT);
   init_wifi(); //função para conectar no host
+  pinMode (sensorTempPin, INPUT);
+  pinMode (sensorUmidPin, INPUT);
 }
 
 /**
@@ -254,25 +264,23 @@ void send_lux(void) {
 
   int statusCode = 0;
 
-  int LDR_value = analogRead(ldrPin); // Lê o valor do LDR em bits (10 bits)
-
-  // Converte o valor lido em tensão
-  float voltage_ldr = LDR_value * (3.3 / 4095.0); // Converte bits em volts para ESP32 (12 bits)
-
-  // Calcula a resistência usando a Lei de Ohm
-  float resistance = (3.3 - voltage_ldr) * R0 / voltage_ldr;
-
-  // Converte a resistência em lux usando a equação matemática
-  float valorLDR = pow(10, (log10(resistance / R0) - A) / B_VALUE);
+  int LDR_value = analogRead(ldrPin);  // Faça a leitura em bits (leitura de 12 bits)
+  float voltage_ldr = LDR_value * (5.0 / 4095);  // Converte bits em volts (5V no ESP32)
+  float lux = voltage_ldr * luxPorVolts;  // Converte volts em lux
 
   Serial.println("----------------------------------");
-  Serial.print("valor em bits: ");
+  Serial.print("Valor em bits: ");
   Serial.println(LDR_value);
-  Serial.print("Lux: ");
-  Serial.println(valorLDR);
+  Serial.print("Valor em volts: ");
+  Serial.println(voltage_ldr, 2);  // Exibe o valor com 2 casas decimais
+  Serial.print("Iluminância (lux): ");
+  Serial.println(lux, 2);  // Exibe o valor de lux com 2 casas decimais
 
 
-  strcpy(postData, "{\n\t\"variable\": \"valorLDR\",\n\t\"value\": ");
+
+
+
+  strcpy(postData, "{\n\t\"variable\": \"lux\",\n\t\"value\": ");
 
   dtostrf(valorLDR, 6, 2, anyData);
 
