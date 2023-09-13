@@ -22,6 +22,8 @@ const int ldrPin = 34;  /* Sensor de luminosidade Pino D34 do ESP*/
 const int sensorUmidPin  = 2;  /* Sensor de umidade Pino D14 do ESP */
 const int sensorTempPin  = 2;   /* Sensor de temperatura  Pino D2 do ESP */
 
+// Fatores de calibração (ajuste esses valores com base na calibração)
+const float luxPorVolts = 200;  // Fator de conversão de volts para lux 
 
 
 
@@ -36,16 +38,12 @@ float umidade = 0;
 
 /* Configuração do Wi-Fi ---------------------------------------------------------*/
 
-
-char wifiSsid[] = "-----"; // Nome da rede Wi-Fi
-char wifiPass[] = "-----";     // Senha da rede Wi-Fi
-
+char wifiSsid[] = "homepage"; // Nome da rede Wi-Fi
+char wifiPass[] = "carromoto";     // Senha da rede Wi-Fi
 
 char serverAddress[] = "https://api.tago.io/data";  // endereço TagoIO 
 char contentHeader[] = "application/json";
-char tokenHeader[]   = "-----"; // TagoIO Token
-
-
+char tokenHeader[]   = "048c70a2-0935-4521-88e1-33668ef60f1c"; // TagoIO Token
 
 HTTPClient client;
 
@@ -106,9 +104,6 @@ void init_wifi(void) {
   Serial.println(WiFi.localIP());
 
 }
-
-
-
 /**
 
    @coleta dodos da temperatura
@@ -254,16 +249,6 @@ void send_lux(void) {
 
 
 
-  char anyData[30];
-
-  char postData[300];
-
-  char anyData1[30];
-
-  char bAny[30];
-
-  int statusCode = 0;
-
   int LDR_value = analogRead(ldrPin);  // Faça a leitura em bits (leitura de 12 bits)
   float voltage_ldr = LDR_value * (5.0 / 4095);  // Converte bits em volts (5V no ESP32)
   float lux = voltage_ldr * luxPorVolts;  // Converte volts em lux
@@ -278,15 +263,24 @@ void send_lux(void) {
 
 
 
+  char anyData[30];
+
+  char postData[300];
+
+  char anyData1[30];
+
+  char bAny[30];
+
+  int statusCode = 0;
 
 
   strcpy(postData, "{\n\t\"variable\": \"lux\",\n\t\"value\": ");
 
-  dtostrf(valorLDR, 6, 2, anyData);
+  dtostrf(lux, 6, 2, anyData);
 
   strncat(postData, anyData, 100);
 
-  strcpy(anyData1, ",\n\t\"unit\": \"Lux\"\n\t}\n");
+  strcpy(anyData1, ",\n\t\"unit\": \"lux\"\n\t}\n");
 
   strncat (postData, anyData1, 100);
 
